@@ -54,6 +54,7 @@ public class AccessFilter implements Filter {
         response.setCharacterEncoding("UTF-8");
 
         HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse rep = (HttpServletResponse) response;
         String servletPath = req.getServletPath();
         String contextPath = req.getContextPath();
 
@@ -65,14 +66,13 @@ public class AccessFilter implements Filter {
         // 如果是不需要过滤的 path 则不过滤：这里主要是登录及登录验证的 path
         for(String s : excludeArray) {
             if(servletPath.equals(s) || servletPath.startsWith(s)) {
-                chain.doFilter(request, response);
+                rep.sendError(403);
                 return;
             }
         }
 
         logger.info(servletPath);
         String user = (String) req.getSession().getAttribute("identity");
-        HttpServletResponse rep = (HttpServletResponse) response;
         if(user == null) {
             // 如果用户没登录可以访问该url，但是如果用户登录了，不能让他访问
             if("/logging/login.jsp".equals(servletPath) || "/login".equals(servletPath) ) {
