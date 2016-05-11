@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Teacher">
+    <!-- 根据教师 ID 获取教师信息 -->
+    <select id="getTeacherById" resultType="Teacher">
+        SELECT * FROM teacher WHERE id = #{id}
+    </select>
+    <!-- 根据教师姓名获取教师信息 -->
+    <select id="getTeacherByName" resultType="Teacher">
+        SELECT * FROM teacher WHERE name = #{name}
+    </select>
+    <!-- 根据教师 ID 更新教师信息-->
+    <update id="updateTeacher">
+        UPDATE teacher SET
+            id = #{id},
+            password = #{password},
+            name = #{name},
+            department = #{department},
+            title = #{title},
+            gender = #{gender},
+            phone = #{phone},
+            email = #{email},
+            in_year = #{inYear},
+            native_place = #{nativePlace}
+        WHERE id = #{id}
+    </update>
+</mapper>

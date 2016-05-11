@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="logImpl" value="LOG4J2"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="xyz.TonyaBaSygroup.course.entity.Student" alias="Student"/>
+        <typeAlias type="xyz.TonyaBaSygroup.course.entity.Teacher" alias="Teacher"/>
+        <typeAlias type="xyz.TonyaBaSygroup.course.entity.Manager" alias="Manager"/>
+        <typeAlias type="xyz.TonyaBaSygroup.course.entity.Course"  alias="Course"/>
+        <typeAlias type="xyz.TonyaBaSygroup.course.entity.Classroom"  alias="Classroom"/>
+        <typeAlias type="xyz.TonyaBaSygroup.course.entity.CourseChooseLog"  alias="CourseChooseLog"/>
+    </typeAliases>
+
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/course?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mybatis/StudentMapper.xml"/>
+        <mapper resource="mybatis/TeacherMapper.xml"/>
+        <mapper resource="mybatis/ManagerMapper.xml"/>
+        <mapper resource="mybatis/CourseMapper.xml"/>
+        <mapper resource="mybatis/ClassroomMapper.xml"/>
+        <mapper resource="mybatis/CourseChooseLogMapper.xml"/>
+    </mappers>
+</configuration>
