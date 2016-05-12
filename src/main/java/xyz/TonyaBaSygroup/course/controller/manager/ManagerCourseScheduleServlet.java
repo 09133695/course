@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author TonyaBaSy_ypc
+ * @author TonyaBaSy
  * @version 1.0 4/17/16
  */
 @WebServlet(name = "ManagerCourseScheduleServlet")

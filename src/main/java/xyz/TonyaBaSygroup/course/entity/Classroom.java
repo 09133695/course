@@ -1,7 +1,7 @@
 package xyz.TonyaBaSygroup.course.entity;
 
 /**
- * @author TonyaBaSy_ypc
+ * @author TonyaBaSy
  * @version 1.0 4/16/16
  */
 public class Classroom {

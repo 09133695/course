@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author TonyaBaSy_ypc
+ * @author TonyaBaSy
  * @version 1.0 4/30/16
  */
 @WebServlet(name = "StudentHomeServlet")
