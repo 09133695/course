@@ -64,7 +64,7 @@ public class ChooseCourseServlet extends HttpServlet {
         try (SqlSession sqlSession = sessionFactory.openSession()) {
             Student student = sqlSession.selectOne("Student.getStudentById", studentId);
             courses = sqlSession.selectList("Course.getCoursesByCondition", new HashMap<String, String>() {
-                {put("major", student.getStudentClass()); put("isSchedule", "true");}
+                {put("className", student.getStudentClass()); put("isSchedule", "true");}
             });
             courseChooseLogs = sqlSession.selectList("CourseChooseLog.getCourseChooseLogByStudentId", studentId);
 

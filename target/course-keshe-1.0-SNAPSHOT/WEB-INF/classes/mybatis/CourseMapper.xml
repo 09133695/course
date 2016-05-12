@@ -34,8 +34,8 @@
         SEC_TO_TIME(time_to) as time_to,  classroom_id,  capacity, now, teacher_id,  teacher_name,  courseware_url,  description
         FROM course
         <where>
-            <if test="major != null">
-                classes LIKE CONCAT('%',#{major}, '%')
+            <if test="className != null">
+                classes LIKE CONCAT('%',#{className}, '%')
             </if>
             <if test="isSchedule == 'true'.toString()">
                 AND time_from IS NOT NULL

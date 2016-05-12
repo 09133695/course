@@ -247,7 +247,8 @@
                                 data-weekTo="${item.weekTo}"
                                 data-weekday="${item.weekday }"
                                 data-timeFrom="${item.timeFrom }"
-                                data-timeTo="${item.timeTo }">
+                                data-timeTo="${item.timeTo }"
+                                data-teacherId="${item.teacherId}">
 
                                 <td>${item.id }</td>
                                 <td>${item.name }</td>
@@ -453,7 +454,7 @@
             $modal.find('[name=classroom]').val($tr.find('td:nth-child(5)').text());
             $modal.find('[name=now]').val($tr.find('td:nth-child(6)').text());
             $modal.find('[name=capacity]').val($tr.find('td:nth-child(7)').text());
-            $modal.find('[name=teacher]').val($tr.find('td:nth-child(8)').text());
+            $modal.find('[name=teacher]').val($tr.data('teacherid'));
             $modal.find('[name=note]').val($tr.data('note'));
         }
 

@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import xyz.TonyaBaSygroup.course.entity.Course;
+import xyz.TonyaBaSygroup.course.entity.Teacher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -92,15 +93,21 @@ public class ManagerCourseScheduleServlet extends HttpServlet {
         course.setTimeTo(map.get("timeTo"));
         course.setCapacity(Integer.valueOf(map.get("capacity")));
         course.setClassroomId(map.get("classroom"));
-        course.setTeacherId((String) request.getSession().getAttribute("id"));
-        course.setTeacherName((String) request.getSession().getAttribute("name"));
+        course.setTeacherId(map.get("teacherId"));
+//        course.setTeacherName((String) request.getSession().getAttribute("name"));
         course.setDescription(map.get("note"));
 
-
         try (SqlSession sqlSession = sessionFactory.openSession()){
-            int num = sqlSession.insert("Course.insertCourse", course);
-            sqlSession.commit();
-            return num == 1 ? SUCCESS : FAILURE;
+            Teacher teacher = sqlSession.selectOne("getTeacherById", course.getTeacherId());
+            if (teacher != null) {
+                System.out.println("teacher name: " + teacher.getName());
+                course.setTeacherName(teacher.getName());
+                int num = sqlSession.insert("Course.insertCourse", course);
+                sqlSession.commit();
+                return num == 1 ? SUCCESS : FAILURE;
+            }
+            else
+                return FAILURE;
         }
     }
     private String editCourse(HttpServletRequest request, Map<String, String> map) throws ServletException,IOException {
@@ -115,15 +122,22 @@ public class ManagerCourseScheduleServlet extends HttpServlet {
         course.setTimeTo(map.get("timeTo"));
         course.setClassroomId(map.get("classroom"));
         course.setCapacity(Integer.valueOf(map.get("capacity")));
-        course.setTeacherId((String) request.getSession().getAttribute("id"));
-        course.setTeacherName((String) request.getSession().getAttribute("name"));
+        course.setTeacherId(map.get("teacherId"));
+//        course.setTeacherName((String) request.getSession().getAttribute("name"));
         course.setDescription(map.get("note"));
 
 
-        try (SqlSession sqlSession = sessionFactory.openSession()){
-            int num = sqlSession.update("Course.updateCourse", course);
-            sqlSession.commit();
-            return num == 1 ? SUCCESS : FAILURE;
+        try (SqlSession sqlSession = sessionFactory.openSession()) {
+            Teacher teacher = sqlSession.selectOne("getTeacherById", course.getTeacherId());
+            if (teacher != null) {
+                System.out.println("teacher name: " + teacher.getName());
+                course.setTeacherName(teacher.getName());
+                int num = sqlSession.update("Course.updateCourse", course);
+                sqlSession.commit();
+                return num == 1 ? SUCCESS : FAILURE;
+            }
+            else
+                return FAILURE;
         }
     }
     private String scrapCourse(HttpServletRequest request, Map<String, String> map) throws ServletException,IOException {
